@@ -15,11 +15,8 @@ app.get('/', (req, res) => {
 
 require("./routes/auth/auth")(app);
 require("./routes/users/users")(app);
+require("./routes/parkings/parkings")(app);
 
 app.listen(port, () => {
 	console.log(`Server running on ${port}`);
-});
-
-app.use(function (req, res) {
-	res.status(404);
 });
