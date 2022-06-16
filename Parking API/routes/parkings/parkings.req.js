@@ -37,27 +37,29 @@ exports.findById = (res, id) => {
     })
 }
 
-exports.store = (res, title, description, lots, location) => {
-    db.run("insert into parkings (title, description, lots, location, remaining_lots) values (?,?,?,?,?)",
-        [title, description, lots, location, lots], (err) => {
+exports.store = (res, title, description, lots, price, location) => {
+    // console.log(title, description, lots, price, location);
+    db.run("insert into parkings (title, description, lots, price, location) values (?,?,?,?,?)",
+        [title, description, lots, price, location], (err) => {
             if (err && err.code === "SQLITE_CONSTRAINT") {
                 res.json({
                     error: "This location is already used"
                 })
             }
-            res.status(201).json({
+            // console.log(this);
+            res.json({
                 status: "success",
-                id: this.lastID
+                // id: this.lastID
             })
         }
     )
 }
 
-exports.update = (res, id, title, description, location) => {
-    db.run(`UPDATE parkings set title = ?, description = ?, location = ? WHERE id = ?`,
-        [title, description, location, id],
+exports.update = (res, id, title, description, location, lots) => {
+    db.run(`UPDATE parkings set title = ?, description = ?, location = ?, lots = ? WHERE id = ?`,
+        [title, description, location, lots, id],
         function (err) {
-            console.log(err)
+            // console.log(err)
             if (err && err.code === "SQLITE_CONSTRAINT")
                 res.status(400).json({ "error": "This location is already used" })
             else res.json({
