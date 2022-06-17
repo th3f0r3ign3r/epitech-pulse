@@ -1,0 +1,31 @@
+{
+  "name": "epitech-pulse",
+  "version": "1.0.0",
+  "description": "Api for Parking lots booking",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src/js",
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/th3f0r3ign3r/epitech-pulse.git"
+  },
+  "author": "Ronel KPOSSOU (th3f0r31gn3r)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/th3f0r3ign3r/epitech-pulse/issues"
+  },
+  "homepage": "https://github.com/th3f0r3ign3r/epitech-pulse#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "sqlite3": "^5.0.8"
+  },
+  "devDependencies": {
+    "eslint": "^8.17.0"
+  }
+}
