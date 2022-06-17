@@ -2,10 +2,10 @@ const authenticate = require("../../middleware/authenticate")
 const { store, findAllParkings, findById, update, destroy } = require("./parkings.req")
 
 module.exports = (app) => {
-    app.get("/api/parkings", (req, res) => {
+    app.get("/api/parkings", authenticate, (req, res) => {
         findAllParkings(res)
     })
-    app.post("/api/parkings", (req, res) => {
+    app.post("/api/parkings", authenticate, (req, res) => {
         const errors = [];
 
         if (req.body.title.length < 5 || typeof req.body.title !== "string")
@@ -22,10 +22,10 @@ module.exports = (app) => {
         if (errors.length !== 0) res.json({ errors: errors })
         store(res, req.body.title, req.body.description, parseInt(req.body.lots), parseInt(req.body.price), req.body.location)
     })
-    app.get("/api/parking/:id", (req, res) => {
+    app.get("/api/parking/:id", authenticate, (req, res) => {
         findById(res, req.params.id)
     })
-    app.patch("/api/parking/:id", (req, res) => {
+    app.patch("/api/parking/:id", authenticate, (req, res) => {
         const errors = [];
 
         if (req.body.title.length < 5 && typeof req.body.title !== "string")
@@ -40,7 +40,7 @@ module.exports = (app) => {
         if (errors.length !== 0) res.json({ errors: errors })
         update(res, req.params.id, req.body.title, req.body.description, req.body.location, req.body.lots)
     })
-    app.delete("/api/parking/:id", (req, res) => {
+    app.delete("/api/parking/:id", authenticate, (req, res) => {
         destroy(res, req.params.id)
     })
 }
